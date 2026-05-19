@@ -2,14 +2,15 @@
 
 ## Project Overview
 
-This project is a website-based automated customer feedback calling system.  
+This project is a website-based automated customer feedback calling system.
+
 The system is designed to collect customer feedback through automated calls and display the results on a dashboard.
 
 ---
 
 ## Phase 1 Setup
 
-The first phase focuses on environment setup, tool installation, and initial testing.
+The first phase focuses on environment setup, installation, and initial Whisper testing.
 
 Completed tasks:
 
@@ -27,12 +28,12 @@ Completed tasks:
 ## Tools Used
 
 - TypeScript
-- Node.js
-- React
+- Python
 - Whisper
-- MongoDB
-- Twilio
+- Git
 - GitHub
+- FFmpeg
+- PyTorch
 
 ---
 
@@ -69,8 +70,6 @@ Voice Response
       ↓
 Speech-to-Text Conversion
       ↓
-Backend Processing
-      ↓
 Dashboard Display
 ```
 
@@ -78,14 +77,4 @@ Dashboard Display
 
 ## Current Status
 
-Initial setup and speech-to-text testing completed successfully.
-
----
-
-## Future Development
-
-- Backend API development
-- Audio upload handling
-- Database integration
-- Dashboard implementation
-- Automated calling integration
+Initial setup and Whisper speech-to-text testing completed successfully.

@@ -1,6 +1,6 @@
 # Automated Feedback Calling System
 
-# Complete Beginner-Friendly Environment Setup and Initial Implementation Guide
+# Complete Environment Setup and Initial Implementation Guide
 
 ---
 
@@ -8,36 +8,34 @@
 
 The Automated Feedback Calling System is a web-based platform designed to automate customer feedback collection using voice calls.
 
-Instead of manually calling customers and writing feedback, the system performs the process automatically.
+Instead of manually collecting customer feedback, the system automates the workflow by:
+- placing automated calls
+- recording customer voice responses
+- converting speech into text
+- processing feedback data
+- displaying results on a dashboard website
 
-The system workflow is:
+The system uses Whisper for speech-to-text conversion.
+
+---
+
+# 2. Project Workflow
 
 ```text
 Customer Receives Call
           ↓
 Customer Speaks Feedback
           ↓
-Speech Converted Into Text
+Audio Response Recorded
           ↓
-Feedback Processed
+Whisper Converts Speech To Text
           ↓
-Results Displayed On Website Dashboard
+Backend Processes Feedback
+          ↓
+Feedback Stored In Database
+          ↓
+Dashboard Displays Results
 ```
-
-The project uses Whisper for speech-to-text conversion.
-
----
-
-# 2. Project Objective
-
-The main objectives of the project are:
-
-- automate customer feedback collection
-- reduce manual work
-- convert customer speech into text
-- store customer responses
-- display feedback on a website dashboard
-- build a scalable workflow using modern technologies
 
 ---
 
@@ -58,67 +56,34 @@ The main objectives of the project are:
 
 ---
 
-# 4. Phase 1 Goal
-
-The goal of Phase 1 is:
-
-- install required software
-- configure development environment
-- install Whisper
-- test speech-to-text conversion
-- create documentation
-- understand project workflow
-
-This phase mainly focuses on:
-- setup
-- testing
-- documentation
-- research
-
-No website or backend implementation is done in this phase.
-
----
-
-# 5. System Requirements
-
-Recommended requirements:
+# 4. Recommended System Requirements
 
 | Component | Requirement |
 |---|---|
 | Operating System | Windows 10 / Windows 11 |
 | RAM | Minimum 8 GB |
 | Storage | Minimum 10 GB free |
-| Python | Python 3.10 |
-| Internet | Required |
+| Python Version | Python 3.10.x |
+| Internet | Required for installation |
 | GPU | Optional |
 
 ---
 
-# 6. Install Python
+# 5. Install Python
 
 ## What Is Python
 
-Python is a programming language.
+Python is a programming language required for running Whisper.
 
-Whisper is built using Python, so Python must be installed before installing Whisper.
+Whisper is built using Python, therefore Python must be installed before installing Whisper.
 
 ---
 
-# Step 1 — Open Python Website
+## Download Python
 
-Open:
+Download Python from the official website:
 
 https://www.python.org/downloads/
-
----
-
-# Step 2 — Download Python
-
-Download:
-
-```text
-Python 3.10
-```
 
 Recommended version:
 
@@ -132,82 +97,39 @@ Reason:
 
 ---
 
-# Step 3 — Run Python Installer
+## Install Python
 
-Open the downloaded installer.
+Run the downloaded installer.
 
-IMPORTANT:
-
-Enable the option:
+During installation:
+enable the following option before continuing:
 
 ```text
 Add Python to PATH
 ```
 
-before clicking install.
+Then proceed using the default installation settings.
 
 ---
 
-# What Is PATH
+## Why PATH Is Important
 
-PATH is a Windows setting.
-
-It allows commands like:
+PATH allows commands such as:
 
 ```bash
 python
 ```
 
-to work from Command Prompt.
+to work globally from Command Prompt.
 
 Without adding Python to PATH:
-- Python commands may not work globally.
+- Python commands may not work correctly.
 
 ---
 
-# Step 4 — Install Python
+## Verify Python Installation
 
-Click:
-
-```text
-Install Now
-```
-
-Wait until installation completes.
-
----
-
-# Step 5 — Verify Python Installation
-
-Open Command Prompt.
-
----
-
-# How To Open Command Prompt
-
-Press:
-
-```text
-Windows Key
-```
-
-Type:
-
-```text
-cmd
-```
-
-Open:
-
-```text
-Command Prompt
-```
-
----
-
-# Run Verification Command
-
-Run:
+Open Command Prompt and run:
 
 ```bash
 python --version
@@ -215,37 +137,37 @@ python --version
 
 ---
 
-# Expected Output
-
-Example:
+## Example Real Output
 
 ```text
+C:\Users\User> python --version
 Python 3.10.11
 ```
 
 ---
 
-# Meaning Of Output
+## Verification
 
-This confirms:
+If the Python version is displayed successfully:
 - Python installed correctly
-- Python added to PATH successfully
+- PATH configured correctly
+- Python commands available globally
 
 ---
 
-# Common Error
+## Common Error
 
-## Error
+### Error
 
 ```text
-python is not recognized
+python is not recognized as an internal or external command
 ```
 
-## Reason
+### Reason
 
 Python was not added to PATH during installation.
 
-## Solution
+### Solution
 
 Reinstall Python and enable:
 
@@ -253,30 +175,26 @@ Reinstall Python and enable:
 Add Python to PATH
 ```
 
+during installation.
+
 ---
 
-# 7. Install Git
+# 6. Install Git
 
 ## What Is Git
 
-Git is a version control system.
-
-Purpose:
-- track project changes
-- manage project files
-- connect local project with GitHub
+Git is a version control system used for:
+- tracking project changes
+- managing source code
+- collaborating with repositories
 
 ---
 
-# Step 1 — Open Git Website
+## Download Git
 
-Open:
+Download Git from:
 
 https://git-scm.com/downloads
-
----
-
-# Step 2 — Download Git
 
 Download:
 
@@ -286,21 +204,15 @@ Git for Windows
 
 ---
 
-# Step 3 — Install Git
+## Install Git
 
-Run installer.
-
-Use default installation settings.
-
-Complete installation.
+Run the installer and continue with the default installation settings.
 
 ---
 
-# Step 4 — Verify Git Installation
+## Verify Git Installation
 
-Open Command Prompt.
-
-Run:
+Open Command Prompt and run:
 
 ```bash
 git --version
@@ -308,75 +220,54 @@ git --version
 
 ---
 
-# Expected Output
-
-Example:
+## Example Real Output
 
 ```text
+C:\Users\User> git --version
 git version 2.49.0.windows.1
 ```
 
 ---
 
-# Meaning Of Output
+## Verification
 
-This confirms:
-- Git installed successfully
+If the Git version is displayed successfully:
+- Git installed correctly
 - Git commands available globally
 
 ---
 
-# 8. Create GitHub Account
+# 7. Create GitHub Repository
 
 ## What Is GitHub
 
 GitHub is a cloud platform used to:
-- store repositories
-- manage projects
-- share code
+- host repositories
+- manage project code
 - maintain documentation
+- track development progress
 
 ---
 
-# Step 1 — Open GitHub
+## Create GitHub Account
 
 Open:
 
 https://github.com/
 
----
-
-# Step 2 — Create Account
-
-Click:
-
-```text
-Sign Up
-```
-
-Enter:
-- email
+Create a GitHub account using:
+- email address
 - username
 - password
 
-Verify email.
+Verify the email address after registration.
 
 ---
 
-# 9. Create GitHub Repository
+## Create Repository
 
-## Step 1 — Create Repository
-
-After login:
-click:
-
-```text
-New Repository
-```
-
----
-
-# Step 2 — Repository Configuration
+After logging in:
+create a new repository using the following details.
 
 Repository name:
 
@@ -396,51 +287,44 @@ Enable:
 Add README.md
 ```
 
-Click:
-
-```text
-Create Repository
-```
+Then create the repository.
 
 ---
 
-# Repository Purpose
+## Repository Purpose
 
-This repository is used for:
-- storing project files
-- documentation
-- project tracking
-- future development
+The repository will contain:
+- setup documentation
+- project research
+- future implementation code
+- workflow architecture
+- development progress
 
 ---
 
-# 10. Install FFmpeg
+# 8. Install FFmpeg
 
 ## What Is FFmpeg
 
 FFmpeg is an audio and video processing tool.
 
 Whisper uses FFmpeg internally to:
-- decode audio
-- process audio files
+- decode audio files
+- process audio input
 - convert audio formats
 
 Without FFmpeg:
-- Whisper audio processing may fail
+- Whisper transcription may fail.
 
 ---
 
-# Step 1 — Open FFmpeg Website
+## Download FFmpeg
 
 Open:
 
 https://ffmpeg.org/download.html
 
----
-
-# Step 2 — Download Windows Build
-
-Recommended source:
+Recommended Windows build source:
 
 https://www.gyan.dev/ffmpeg/builds/
 
@@ -452,11 +336,11 @@ ffmpeg-release-full
 
 ---
 
-# Step 3 — Extract ZIP File
+## Extract FFmpeg
 
-Extract ZIP file.
+Extract the downloaded ZIP file.
 
-Example location:
+Example installation location:
 
 ```text
 C:\ffmpeg
@@ -464,80 +348,22 @@ C:\ffmpeg
 
 ---
 
-# Step 4 — Add FFmpeg To PATH
+## Configure FFmpeg PATH
 
-Open Windows Search.
-
-Search:
-
-```text
-Environment Variables
-```
-
-Open:
-
-```text
-Edit The System Environment Variables
-```
-
-Click:
-
-```text
-Environment Variables
-```
-
-Under:
-
-```text
-System Variables
-```
-
-Select:
-
-```text
-Path
-```
-
-Click:
-
-```text
-Edit
-```
-
-Click:
-
-```text
-New
-```
-
-Add:
+Add the following path to the Windows system PATH variable:
 
 ```text
 C:\ffmpeg\bin
 ```
 
-Click:
-- OK
-- OK
-- OK
+This allows FFmpeg commands to work globally from Command Prompt.
+
+After updating PATH:
+restart Command Prompt before verification.
 
 ---
 
-# Why Add FFmpeg To PATH
-
-This allows commands like:
-
-```bash
-ffmpeg
-```
-
-to work from any folder in Command Prompt.
-
----
-
-# Step 5 — Verify FFmpeg Installation
-
-Open Command Prompt.
+## Verify FFmpeg Installation
 
 Run:
 
@@ -547,37 +373,42 @@ ffmpeg -version
 
 ---
 
-# Expected Output
-
-Example:
+## Example Real Output
 
 ```text
-ffmpeg version 7.x.x
+C:\Users\User> ffmpeg -version
+
+ffmpeg version 7.1-full_build-www.gyan.dev
+
+built with gcc 14.2.0
+
+configuration: --enable-gpl --enable-version3
 ```
 
 ---
 
-# Meaning Of Output
+## Verification
 
-This confirms:
+If FFmpeg version information is displayed:
 - FFmpeg installed correctly
-- FFmpeg added to PATH successfully
+- PATH configured correctly
+- FFmpeg commands available globally
 
 ---
 
-# Common Error
+## Common Error
 
-## Error
+### Error
 
 ```text
-ffmpeg is not recognized
+ffmpeg is not recognized as an internal or external command
 ```
 
-## Reason
+### Reason
 
 FFmpeg was not added to PATH correctly.
 
-## Solution
+### Solution
 
 Add:
 
@@ -585,38 +416,34 @@ Add:
 C:\ffmpeg\bin
 ```
 
-to PATH again.
+to PATH again and restart Command Prompt.
 
 ---
 
-# 11. Install PyTorch
+# 9. Install PyTorch
 
 ## What Is PyTorch
 
 PyTorch is a machine learning framework.
 
 Whisper requires PyTorch for:
-- loading AI models
+- AI model loading
 - speech processing
-- AI inference
+- inference operations
 
 ---
 
-# Step 1 — Open PyTorch Website
+## Open PyTorch Installation Page
 
 Open:
 
 https://pytorch.org/get-started/locally/
 
----
-
-# Step 2 — Select Configuration
-
-Use:
+Use the following configuration:
 
 | Option | Value |
 |---|---|
-| PyTorch Build | Stable |
+| Build | Stable |
 | OS | Windows |
 | Package | Pip |
 | Language | Python |
@@ -624,11 +451,9 @@ Use:
 
 ---
 
-# Step 3 — Install PyTorch
+## Install PyTorch
 
-Open Command Prompt.
-
-Run:
+Open Command Prompt and run:
 
 ```bash
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
@@ -636,7 +461,7 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 
 ---
 
-# What This Command Installs
+## What This Command Installs
 
 This command installs:
 - torch
@@ -647,25 +472,27 @@ with CUDA 12.6 support.
 
 ---
 
-# Step 4 — Wait For Installation
+## Installation Time
 
-Installation may take several minutes.
+PyTorch installation may take:
 
-Reason:
-- PyTorch packages are large
-- CUDA dependencies are included
+```text
+5–15 minutes
+```
+
+depending on:
+- internet speed
+- system performance
 
 ---
 
-# Step 5 — Verify PyTorch Installation
+## Verify PyTorch Installation
 
-Run:
+Open Python:
 
 ```bash
 python
 ```
-
-Python terminal opens.
 
 Run:
 
@@ -676,25 +503,27 @@ print(torch.__version__)
 
 ---
 
-# Expected Output
-
-Example:
+## Example Real Output
 
 ```text
+Python 3.10.11
+
+>>> import torch
+>>> print(torch.__version__)
 2.7.0+cu126
 ```
 
 ---
 
-# Meaning Of Output
+## Verification
 
-This confirms:
+If the PyTorch version is displayed:
 - PyTorch installed correctly
-- CUDA version installed successfully
+- CUDA-enabled version working correctly
 
 ---
 
-# Exit Python Terminal
+## Exit Python Terminal
 
 Run:
 
@@ -704,24 +533,22 @@ exit()
 
 ---
 
-# 12. Install Whisper
+# 10. Install Whisper
 
 ## What Is Whisper
 
-Whisper is a speech-to-text model.
+Whisper is a speech-to-text AI model.
 
 Purpose:
 - convert speech into text
 - process voice responses
-- support audio transcription
+- generate transcriptions
 
 ---
 
-# Step 1 — Install Whisper
+## Install Whisper
 
-Open Command Prompt.
-
-Run:
+Open Command Prompt and run:
 
 ```bash
 pip install openai-whisper
@@ -729,22 +556,30 @@ pip install openai-whisper
 
 ---
 
-# What This Command Installs
+## What This Command Installs
 
 This command installs:
 - Whisper
-- dependencies
+- required dependencies
 - transcription utilities
 
 ---
 
-# Step 2 — Wait For Installation
+## Installation Time
 
-Installation may take several minutes depending on internet speed.
+Installation may take:
+
+```text
+2–10 minutes
+```
+
+depending on:
+- internet speed
+- system performance
 
 ---
 
-# Step 3 — Verify Whisper Installation
+## Verify Whisper Installation
 
 Run:
 
@@ -754,48 +589,105 @@ whisper --help
 
 ---
 
-# Expected Output
-
-Example:
+## Example Real Output
 
 ```text
 usage: whisper [-h] [--model MODEL] [--device DEVICE]
+
+optional arguments:
+  -h, --help
+  --model MODEL
+  --device DEVICE
 ```
 
 ---
 
-# Meaning Of Output
+## Verification
 
-This confirms:
+If Whisper help information is displayed:
 - Whisper installed correctly
 - Whisper commands available globally
 
 ---
 
-# 13. Create Project Folder
+# 11. Recommended Project Structure
 
-Create folder:
+Create the following project structure:
 
 ```text
-C:\Whisper Audio
+automated-feedback-system/
+│
+├── backend/
+├── frontend/
+├── docs/
+├── audio/
+├── outputs/
+└── README.md
 ```
-
-Purpose:
-- store audio files
-- test transcription
-- store outputs
 
 ---
 
-# 14. Add Test Audio File
+## Folder Purpose
 
-Add audio file inside:
+| Folder | Purpose |
+|---|---|
+| backend | Backend implementation |
+| frontend | Frontend dashboard |
+| docs | Documentation files |
+| audio | Input audio files |
+| outputs | Generated transcription files |
+
+---
+
+# 12. Create Audio Testing Folder
+
+Create the following folder:
 
 ```text
-C:\Whisper Audio
+C:\Projects\Whisper Audio
 ```
 
-Example:
+Purpose:
+- store test audio files
+- store transcription outputs
+- test speech-to-text workflow
+
+---
+
+## Example Folder Structure
+
+```text
+C:\Projects\Whisper Audio
+│
+├── download.mp3
+├── download.txt
+├── download.json
+├── download.srt
+└── download.vtt
+```
+
+---
+
+## Meaning Of Generated Files
+
+| File | Purpose |
+|---|---|
+| .txt | Plain transcription text |
+| .json | Structured transcription data |
+| .srt | Subtitle format |
+| .vtt | Web subtitle format |
+
+---
+
+# 13. Add Test Audio File
+
+Place a test audio file inside:
+
+```text
+C:\Projects\Whisper Audio
+```
+
+Example file:
 
 ```text
 download.mp3
@@ -803,20 +695,20 @@ download.mp3
 
 Possible audio sources:
 - voice recording
-- customer feedback audio
-- test audio sample
+- customer feedback recording
+- sample speech audio
 
 ---
 
-# 15. Open Command Prompt Inside Project Folder
+# 14. Open Command Prompt Inside Project Folder
 
 Open:
 
 ```text
-C:\Whisper Audio
+C:\Projects\Whisper Audio
 ```
 
-Click address bar.
+Click the address bar.
 
 Type:
 
@@ -826,13 +718,13 @@ cmd
 
 Press Enter.
 
-Command Prompt opens directly inside the current folder.
+Command Prompt will open directly inside the current folder.
 
 ---
 
-# 16. Run Whisper
+# 15. Run Whisper
 
-Run:
+Run the following command:
 
 ```bash
 whisper download.mp3 --model base --device cpu
@@ -840,27 +732,49 @@ whisper download.mp3 --model base --device cpu
 
 ---
 
-# 17. Detailed Command Explanation
+# 16. Detailed Command Explanation
 
 | Command Part | Meaning |
 |---|---|
 | whisper | Runs Whisper model |
 | download.mp3 | Input audio file |
 | --model base | Uses base Whisper model |
-| --device cpu | Uses CPU instead of GPU |
+| --device cpu | Uses CPU for processing |
 
 ---
 
-# Why CPU Mode Was Used
+## Why CPU Mode Was Used
 
 CPU mode was used because:
 - GPU compatibility issues occurred
 - CPU mode provides stable testing
-- sufficient for setup verification
+- sufficient for initial setup verification
 
 ---
 
-# 18. Whisper Workflow
+# 17. Whisper Model Comparison
+
+| Model | Speed | Accuracy |
+|---|---|
+| tiny | Fastest | Lowest |
+| base | Fast | Good |
+| small | Moderate | Better |
+| medium | Slower | High |
+| large | Slowest | Best |
+
+Current setup uses:
+
+```text
+base
+```
+
+Reason:
+- good balance between speed and accuracy
+- suitable for testing and development
+
+---
+
+# 18. Whisper Processing Workflow
 
 ```text
 Audio File
@@ -883,6 +797,8 @@ Output Generated
 Example:
 
 ```text
+C:\Projects\Whisper Audio> whisper download.mp3 --model base --device cpu
+
 100%|████████████████████████████| 139M/139M
 
 Detecting language using up to the first 30 seconds...
@@ -892,28 +808,46 @@ Detecting language using up to the first 30 seconds...
 
 ---
 
-# Meaning Of Output
+# 20. Meaning Of Output
 
 | Output | Meaning |
 |---|---|
-| 100% download | Whisper model downloaded |
-| Detecting language | Whisper identifying language |
-| Timestamp | Audio timing |
+| 100% download | Whisper model downloaded successfully |
+| Detecting language | Whisper identifying spoken language |
+| Timestamp | Audio timing information |
 | Transcribed sentence | Speech converted into text |
 
 ---
 
-# 20. Successful Verification
+# 21. Successful Verification
 
 Successful transcription confirms:
-- Whisper working correctly
-- FFmpeg working correctly
-- PyTorch installed correctly
-- speech-to-text pipeline functioning
+- Whisper functioning correctly
+- FFmpeg functioning correctly
+- PyTorch functioning correctly
+- speech-to-text workflow functioning successfully
 
 ---
 
-# 21. CUDA Compatibility Issue
+# 22. Performance Notes
+
+| Mode | Description |
+|---|---|
+| CPU | Stable for development and testing |
+| GPU | Faster processing for production workloads |
+
+CPU mode is recommended for:
+- initial setup
+- testing
+- debugging
+
+GPU mode is recommended for:
+- large-scale transcription
+- production environments
+
+---
+
+# 23. CUDA Compatibility Issue
 
 During setup:
 CUDA compatibility issues occurred with RTX 5060 Laptop GPU.
@@ -925,9 +859,9 @@ Possible reasons:
 
 ---
 
-# Solution Used
+## Solution Used
 
-Used CPU mode:
+CPU mode was used:
 
 ```bash
 whisper download.mp3 --model base --device cpu
@@ -940,49 +874,66 @@ This allowed:
 
 ---
 
-# 22. Current Phase Completion
+# 24. Future System Integration Workflow
+
+Future implementation workflow:
+
+```text
+Frontend Uploads Audio
+            ↓
+Backend Receives Audio
+            ↓
+Whisper Processes Audio
+            ↓
+Transcription Stored In MongoDB
+            ↓
+Dashboard Displays Results
+```
+
+---
+
+# 25. Setup Validation Checklist
+
+Successful setup should confirm:
+
+```text
+✅ Python installed
+✅ Git installed
+✅ GitHub repository created
+✅ FFmpeg installed
+✅ PyTorch installed
+✅ Whisper installed
+✅ Audio transcription successful
+```
+
+---
+
+# 26. Current Phase Completion
 
 The following tasks were completed successfully:
 
-- Python installation
-- Git installation
-- GitHub repository creation
-- FFmpeg installation
-- PyTorch installation
-- Whisper installation
-- Speech-to-text testing
-- Documentation creation
+- development environment setup
+- dependency installation
+- Whisper configuration
+- speech-to-text testing
+- documentation creation
 
 ---
 
-# 23. Future Development Plan
+# 27. Future Development Plan
 
 Future phases include:
-
 - TypeScript backend implementation
 - Express API development
-- Audio upload handling
 - MongoDB integration
-- Dashboard implementation
-- Automated call integration
-- Feedback analytics
-- Website deployment
+- dashboard implementation
+- automated calling integration
+- feedback analytics
+- website deployment
 
 ---
 
-# 24. Repository Purpose
-
-The repository contains:
-- setup documentation
-- implementation research
-- installation guides
-- workflow explanation
-- troubleshooting process
-- future development planning
-
----
-
-# 25. Final Result
+# 28. Final Result
 
 At the end of Phase 1:
 - development environment configured successfully

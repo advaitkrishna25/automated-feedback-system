@@ -755,7 +755,7 @@ CPU mode was used because:
 # 17. Whisper Model Comparison
 
 | Model | Speed | Accuracy |
-|---|---|
+|---|---|---|
 | tiny | Fastest | Lowest |
 | base | Fast | Good |
 | small | Moderate | Better |

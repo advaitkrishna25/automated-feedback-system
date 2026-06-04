@@ -1,40 +1,42 @@
-# Automated Feedback Calling System
-
-# Complete Environment Setup and Initial Implementation Guide
-
----
+# Complete Environment Setup and Initial Backend Development Guide
 
 # 1. Introduction
 
-The Automated Feedback Calling System is a web-based platform designed to automate customer feedback collection using voice calls.
+The Automated Feedback Calling System is a web-based platform designed to automate patient feedback collection using voice calls, speech transcription, and AI-based feedback analysis.
 
-Instead of manually collecting customer feedback, the system automates the workflow by:
+Instead of manually collecting patient feedback, the system automates the workflow by:
+
 - placing automated calls
-- recording customer voice responses
+- recording patient voice responses
 - converting speech into text
-- processing feedback data
-- displaying results on a dashboard website
+- processing feedback data using AI
+- generating structured analytical insights
+- preparing data for dashboard visualization
 
-The system uses Whisper for speech-to-text conversion.
+The system currently uses Whisper for speech-to-text conversion and Qwen 2.5 7B for AI-based transcript analysis.
 
 ---
 
-# 2. Project Workflow
+# 2. Current System Workflow
 
 ```text
-Customer Receives Call
-          ↓
-Customer Speaks Feedback
-          ↓
+Patient Receives Call
+↓
+Patient Speaks Feedback
+↓
 Audio Response Recorded
-          ↓
-Whisper Converts Speech To Text
-          ↓
-Backend Processes Feedback
-          ↓
-Feedback Stored In Database
-          ↓
-Dashboard Displays Results
+↓
+Whisper Large-v3 Converts Speech To Text
+↓
+Transcript Generated
+↓
+Qwen 2.5 7B Processes Transcript
+↓
+Structured JSON Analysis Generated
+↓
+Database Storage (Planned)
+↓
+Dashboard Visualization (Planned)
 ```
 
 ---
@@ -44,11 +46,13 @@ Dashboard Displays Results
 | Technology | Purpose |
 |---|---|
 | TypeScript | Backend and frontend development |
-| Node.js | Backend runtime |
+| Next.js | Full-stack application framework |
 | React | Frontend dashboard |
-| Whisper | Speech-to-text conversion |
-| MongoDB | Database |
-| Twilio | Automated calling |
+| Tailwind CSS | Frontend styling |
+| Whisper Large-v3 | Speech-to-text conversion |
+| Qwen 2.5 7B | AI feedback analysis |
+| Ollama | Local AI model execution |
+| PostgreSQL | Planned database |
 | FFmpeg | Audio processing |
 | PyTorch | Machine learning framework |
 | Git | Version control |
@@ -64,6 +68,7 @@ Dashboard Displays Results
 | RAM | Minimum 8 GB |
 | Storage | Minimum 10 GB free |
 | Python Version | Python 3.10.x |
+| Node.js Version | Node.js 20+ Recommended |
 | Internet | Required for installation |
 | GPU | Optional |
 
@@ -73,7 +78,7 @@ Dashboard Displays Results
 
 ## What Is Python
 
-Python is a programming language required for running Whisper.
+Python is required for running Whisper and AI processing utilities.
 
 Whisper is built using Python, therefore Python must be installed before installing Whisper.
 
@@ -83,7 +88,9 @@ Whisper is built using Python, therefore Python must be installed before install
 
 Download Python from the official website:
 
+```text
 https://www.python.org/downloads/
+```
 
 Recommended version:
 
@@ -92,6 +99,7 @@ Python 3.10.x
 ```
 
 Reason:
+
 - stable compatibility with Whisper
 - stable compatibility with PyTorch
 
@@ -102,7 +110,8 @@ Reason:
 Run the downloaded installer.
 
 During installation:
-enable the following option before continuing:
+
+Enable the following option before continuing:
 
 ```text
 Add Python to PATH
@@ -123,7 +132,8 @@ python
 to work globally from Command Prompt.
 
 Without adding Python to PATH:
-- Python commands may not work correctly.
+
+Python commands may not work correctly.
 
 ---
 
@@ -135,20 +145,15 @@ Open Command Prompt and run:
 python --version
 ```
 
----
-
-## Example Real Output
+### Example Output
 
 ```text
 C:\Users\User> python --version
 Python 3.10.11
 ```
 
----
-
-## Verification
-
 If the Python version is displayed successfully:
+
 - Python installed correctly
 - PATH configured correctly
 - Python commands available globally
@@ -179,11 +184,72 @@ during installation.
 
 ---
 
-# 6. Install Git
+# 6. Install Node.js
+
+## What Is Node.js
+
+Node.js is the JavaScript runtime required for running the Next.js application and backend APIs.
+
+The project currently uses Next.js for both frontend and backend development.
+
+---
+
+## Download Node.js
+
+Download Node.js from:
+
+```text
+https://nodejs.org/
+```
+
+Recommended version:
+
+```text
+Node.js 20+
+```
+
+---
+
+## Verify Node.js Installation
+
+Open Command Prompt and run:
+
+```bash
+node --version
+```
+
+Example output:
+
+```text
+v20.18.0
+```
+
+Verify npm installation:
+
+```bash
+npm --version
+```
+
+Example output:
+
+```text
+10.8.2
+```
+
+Successful output confirms:
+
+- Node.js installed correctly
+- npm installed correctly
+- JavaScript runtime configured successfully
+
+---
+
+# 7. Install Git
 
 ## What Is Git
 
 Git is a version control system used for:
+
 - tracking project changes
 - managing source code
 - collaborating with repositories
@@ -194,7 +260,9 @@ Git is a version control system used for:
 
 Download Git from:
 
+```text
 https://git-scm.com/downloads
+```
 
 Download:
 
@@ -206,7 +274,7 @@ Git for Windows
 
 ## Install Git
 
-Run the installer and continue with the default installation settings.
+Run the installer and continue using the default installation settings.
 
 ---
 
@@ -218,64 +286,41 @@ Open Command Prompt and run:
 git --version
 ```
 
----
-
-## Example Real Output
+### Example Output
 
 ```text
-C:\Users\User> git --version
 git version 2.49.0.windows.1
 ```
 
----
+Successful output confirms:
 
-## Verification
-
-If the Git version is displayed successfully:
 - Git installed correctly
 - Git commands available globally
 
 ---
 
-# 7. Create GitHub Repository
+# 8. Create GitHub Repository
 
 ## What Is GitHub
 
 GitHub is a cloud platform used to:
+
 - host repositories
 - manage project code
 - maintain documentation
-- track development progress
-
----
-
-## Create GitHub Account
-
-Open:
-
-https://github.com/
-
-Create a GitHub account using:
-- email address
-- username
-- password
-
-Verify the email address after registration.
+- track software development
 
 ---
 
 ## Create Repository
 
-After logging in:
-create a new repository using the following details.
-
-Repository name:
+Create a new repository using:
 
 ```text
 automated-feedback-system
 ```
 
-Visibility:
+Recommended visibility:
 
 ```text
 Public
@@ -287,34 +332,32 @@ Enable:
 Add README.md
 ```
 
-Then create the repository.
+The repository is intended to contain:
+
+- backend implementation
+- AI integration workflows
+- documentation
+- architecture references
+- onboarding guides
+- deployment guides
 
 ---
 
-## Repository Purpose
-
-The repository will contain:
-- setup documentation
-- project research
-- future implementation code
-- workflow architecture
-- development progress
-
----
-
-# 8. Install FFmpeg
+# 9. Install FFmpeg
 
 ## What Is FFmpeg
 
 FFmpeg is an audio and video processing tool.
 
 Whisper uses FFmpeg internally to:
+
 - decode audio files
 - process audio input
 - convert audio formats
 
 Without FFmpeg:
-- Whisper transcription may fail.
+
+Whisper transcription may fail.
 
 ---
 
@@ -322,11 +365,15 @@ Without FFmpeg:
 
 Open:
 
+```text
 https://ffmpeg.org/download.html
+```
 
 Recommended Windows build source:
 
+```text
 https://www.gyan.dev/ffmpeg/builds/
+```
 
 Download:
 
@@ -356,10 +403,7 @@ Add the following path to the Windows system PATH variable:
 C:\ffmpeg\bin
 ```
 
-This allows FFmpeg commands to work globally from Command Prompt.
-
-After updating PATH:
-restart Command Prompt before verification.
+Restart Command Prompt after updating PATH.
 
 ---
 
@@ -371,75 +415,43 @@ Run:
 ffmpeg -version
 ```
 
----
-
-## Example Real Output
+### Example Output
 
 ```text
-C:\Users\User> ffmpeg -version
-
 ffmpeg version 7.1-full_build-www.gyan.dev
-
-built with gcc 14.2.0
-
-configuration: --enable-gpl --enable-version3
 ```
 
----
+Successful output confirms:
 
-## Verification
-
-If FFmpeg version information is displayed:
 - FFmpeg installed correctly
 - PATH configured correctly
 - FFmpeg commands available globally
 
 ---
 
-## Common Error
-
-### Error
-
-```text
-ffmpeg is not recognized as an internal or external command
-```
-
-### Reason
-
-FFmpeg was not added to PATH correctly.
-
-### Solution
-
-Add:
-
-```text
-C:\ffmpeg\bin
-```
-
-to PATH again and restart Command Prompt.
-
----
-
-# 9. Install PyTorch
+# 10. Install PyTorch
 
 ## What Is PyTorch
 
-PyTorch is a machine learning framework.
+PyTorch is a machine learning framework required by Whisper.
 
-Whisper requires PyTorch for:
+Whisper uses PyTorch for:
+
 - AI model loading
 - speech processing
-- inference operations
+- inference execution
 
 ---
 
-## Open PyTorch Installation Page
+## Install PyTorch
 
 Open:
 
+```text
 https://pytorch.org/get-started/locally/
+```
 
-Use the following configuration:
+Use:
 
 | Option | Value |
 |---|---|
@@ -449,40 +461,11 @@ Use the following configuration:
 | Language | Python |
 | Compute Platform | CUDA 12.6 |
 
----
-
-## Install PyTorch
-
-Open Command Prompt and run:
+Install using:
 
 ```bash
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
 ```
-
----
-
-## What This Command Installs
-
-This command installs:
-- torch
-- torchvision
-- torchaudio
-
-with CUDA 12.6 support.
-
----
-
-## Installation Time
-
-PyTorch installation may take:
-
-```text
-5–15 minutes
-```
-
-depending on:
-- internet speed
-- system performance
 
 ---
 
@@ -498,34 +481,21 @@ Run:
 
 ```python
 import torch
-print(torch.__version__)
+print(torch.version)
 ```
 
----
-
-## Example Real Output
+Example output:
 
 ```text
-Python 3.10.11
-
->>> import torch
->>> print(torch.__version__)
 2.7.0+cu126
 ```
 
----
+Successful output confirms:
 
-## Verification
-
-If the PyTorch version is displayed:
 - PyTorch installed correctly
-- CUDA-enabled version working correctly
+- CUDA-enabled version functioning correctly
 
----
-
-## Exit Python Terminal
-
-Run:
+Exit Python terminal:
 
 ```python
 exit()
@@ -533,49 +503,21 @@ exit()
 
 ---
 
-# 10. Install Whisper
+# 11. Install Whisper
 
 ## What Is Whisper
 
-Whisper is a speech-to-text AI model.
-
-Purpose:
-- convert speech into text
-- process voice responses
-- generate transcriptions
+Whisper is a speech-to-text AI model used for converting patient voice responses into text transcripts.
 
 ---
 
 ## Install Whisper
 
-Open Command Prompt and run:
+Run:
 
 ```bash
 pip install openai-whisper
 ```
-
----
-
-## What This Command Installs
-
-This command installs:
-- Whisper
-- required dependencies
-- transcription utilities
-
----
-
-## Installation Time
-
-Installation may take:
-
-```text
-2–10 minutes
-```
-
-depending on:
-- internet speed
-- system performance
 
 ---
 
@@ -587,144 +529,235 @@ Run:
 whisper --help
 ```
 
----
+Successful output confirms:
 
-## Example Real Output
-
-```text
-usage: whisper [-h] [--model MODEL] [--device DEVICE]
-
-optional arguments:
-  -h, --help
-  --model MODEL
-  --device DEVICE
-```
-
----
-
-## Verification
-
-If Whisper help information is displayed:
 - Whisper installed correctly
 - Whisper commands available globally
 
 ---
 
-# 11. Recommended Project Structure
+# 12. Install Ollama
 
-Create the following project structure:
+## What Is Ollama
+
+Ollama is a local AI model execution platform used for running Qwen 2.5 7B locally.
+
+Purpose:
+
+- local LLM execution
+- offline inference
+- AI API access
+- structured transcript analysis
+
+Official website:
+
+```text
+https://ollama.com
+```
+
+---
+
+## Install Ollama
+
+Download and install Ollama from the official website.
+
+After installation, verify:
+
+```bash
+ollama --version
+```
+
+---
+
+# 13. Install Qwen 2.5 7B
+
+Pull the selected AI model using:
+
+```bash
+ollama pull qwen2.5:7b
+```
+
+---
+
+## Verify Model Installation
+
+Run:
+
+```bash
+ollama run qwen2.5:7b
+```
+
+Example prompt:
+
+```text
+What is sentiment analysis?
+```
+
+Successful output confirms:
+
+- model downloaded correctly
+- Ollama functioning correctly
+- local inference operational
+
+---
+
+# 14. Clone Repository
+
+Clone the repository locally:
+
+```bash
+git clone https://github.com/your-username/automated-feedback-system.git
+```
+
+Move into the frontend application:
+
+```bash
+cd automated-feedback-system/frontend
+```
+
+---
+
+# 15. Install Frontend Dependencies
+
+Install project dependencies:
+
+```bash
+npm install
+```
+
+This installs:
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- backend dependencies
+
+---
+
+# 16. Current Repository Structure
 
 ```text
 automated-feedback-system/
 │
-├── backend/
-├── frontend/
+├── README.md
 ├── docs/
+│
+├── frontend/
+│   ├── src/
+│   │   ├── app/
+│   │   │   └── api/
+│   │   │
+│   │   ├── controllers/
+│   │   ├── services/
+│   │   ├── repositories/
+│   │   ├── models/
+│   │   ├── lib/
+│   │   └── types/
+│
 ├── audio/
-├── outputs/
-└── README.md
+└── outputs/
 ```
 
 ---
 
-## Folder Purpose
+# 17. Backend Folder Purpose
 
 | Folder | Purpose |
 |---|---|
-| backend | Backend implementation |
-| frontend | Frontend dashboard |
-| docs | Documentation files |
-| audio | Input audio files |
-| outputs | Generated transcription files |
+| controllers | Handles HTTP request and response logic |
+| services | Intended for AI processing and business logic |
+| repositories | Planned database abstraction layer |
+| models | Application data models |
+| lib | Shared utilities and helper functions |
+| types | TypeScript type definitions |
 
 ---
 
-# 12. Create Audio Testing Folder
+# 18. Start Development Server
 
-Create the following folder:
+Run the Next.js development server:
+
+```bash
+npm run dev
+```
+
+Expected output:
 
 ```text
-C:\Projects\Whisper Audio
+Local: http://localhost:3000
+```
+
+Successful output confirms:
+
+- Next.js application running
+- backend API routes functioning
+- frontend environment configured successfully
+
+---
+
+# 19. Current Backend APIs
+
+## Health Check Endpoint
+
+```http
+GET /api/health
 ```
 
 Purpose:
-- store test audio files
-- store transcription outputs
-- test speech-to-text workflow
+
+- backend availability verification
+- API status validation
 
 ---
 
-## Example Folder Structure
+## Retrieve Feedback Endpoint
 
-```text
-C:\Projects\Whisper Audio
-│
-├── download.mp3
-├── download.txt
-├── download.json
-├── download.srt
-└── download.vtt
+```http
+GET /api/feedback
+```
+
+Purpose:
+
+- retrieve feedback data
+- verify API routing
+
+---
+
+## Submit Feedback Endpoint
+
+```http
+POST /api/feedback
+```
+
+Purpose:
+
+- receive patient transcript data
+- prepare transcript analysis workflow
+
+---
+
+# 20. API Testing
+
+Example API test using browser or Postman:
+
+```http
+GET http://localhost:3000/api/health
+```
+
+Expected response:
+
+```json
+{
+  "status": "ok"
+}
 ```
 
 ---
 
-## Meaning Of Generated Files
+# 21. Whisper Audio Testing
 
-| File | Purpose |
-|---|---|
-| .txt | Plain transcription text |
-| .json | Structured transcription data |
-| .srt | Subtitle format |
-| .vtt | Web subtitle format |
-
----
-
-# 13. Add Test Audio File
-
-Place a test audio file inside:
-
-```text
-C:\Projects\Whisper Audio
-```
-
-Example file:
-
-```text
-download.mp3
-```
-
-Possible audio sources:
-- voice recording
-- customer feedback recording
-- sample speech audio
-
----
-
-# 14. Open Command Prompt Inside Project Folder
-
-Open:
-
-```text
-C:\Projects\Whisper Audio
-```
-
-Click the address bar.
-
-Type:
-
-```text
-cmd
-```
-
-Press Enter.
-
-Command Prompt will open directly inside the current folder.
-
----
-
-# 15. Run Whisper
-
-Run the following command:
+Run Whisper transcription:
 
 ```bash
 whisper download.mp3 --model base --device cpu
@@ -732,214 +765,75 @@ whisper download.mp3 --model base --device cpu
 
 ---
 
-# 16. Detailed Command Explanation
-
-| Command Part | Meaning |
-|---|---|
-| whisper | Runs Whisper model |
-| download.mp3 | Input audio file |
-| --model base | Uses base Whisper model |
-| --device cpu | Uses CPU for processing |
-
----
-
-## Why CPU Mode Was Used
-
-CPU mode was used because:
-- GPU compatibility issues occurred
-- CPU mode provides stable testing
-- sufficient for initial setup verification
-
----
-
-# 17. Whisper Model Comparison
-
-| Model | Speed | Accuracy |
-|---|---|---|
-| tiny | Fastest | Lowest |
-| base | Fast | Good |
-| small | Moderate | Better |
-| medium | Slower | High |
-| large | Slowest | Best |
-
-Current setup uses:
+## Expected Output
 
 ```text
-base
-```
-
-Reason:
-- good balance between speed and accuracy
-- suitable for testing and development
-
----
-
-# 18. Whisper Processing Workflow
-
-```text
-Audio File
-     ↓
-Whisper Loads AI Model
-     ↓
-Audio Processing
-     ↓
-Speech Recognition
-     ↓
-Text Transcription
-     ↓
-Output Generated
-```
-
----
-
-# 19. Expected Terminal Output
-
-Example:
-
-```text
-C:\Projects\Whisper Audio> whisper download.mp3 --model base --device cpu
-
-100%|████████████████████████████| 139M/139M
-
 Detecting language using up to the first 30 seconds...
-
 [00:00.000 --> 00:03.000] The service was very good.
 ```
 
----
-
-# 20. Meaning Of Output
-
-| Output | Meaning |
-|---|---|
-| 100% download | Whisper model downloaded successfully |
-| Detecting language | Whisper identifying spoken language |
-| Timestamp | Audio timing information |
-| Transcribed sentence | Speech converted into text |
-
----
-
-# 21. Successful Verification
-
 Successful transcription confirms:
+
 - Whisper functioning correctly
 - FFmpeg functioning correctly
-- PyTorch functioning correctly
-- speech-to-text workflow functioning successfully
+- speech-to-text pipeline operational
 
 ---
 
-# 22. Performance Notes
-
-| Mode | Description |
-|---|---|
-| CPU | Stable for development and testing |
-| GPU | Faster processing for production workloads |
-
-CPU mode is recommended for:
-- initial setup
-- testing
-- debugging
-
-GPU mode is recommended for:
-- large-scale transcription
-- production environments
-
----
-
-# 23. CUDA Compatibility Issue
-
-During setup:
-CUDA compatibility issues occurred with RTX 5060 Laptop GPU.
-
-Possible reasons:
-- newer GPU architecture
-- CUDA version mismatch
-- unsupported PyTorch build
-
----
-
-## Solution Used
-
-CPU mode was used:
-
-```bash
-whisper download.mp3 --model base --device cpu
-```
-
-This allowed:
-- stable execution
-- successful testing
-- bypassing GPU dependency
-
----
-
-# 24. Future System Integration Workflow
-
-Future implementation workflow:
+# 22. Current Local Development Workflow
 
 ```text
-Frontend Uploads Audio
-            ↓
-Backend Receives Audio
-            ↓
-Whisper Processes Audio
-            ↓
-Transcription Stored In MongoDB
-            ↓
-Dashboard Displays Results
+Start Ollama
+↓
+Run Next.js Development Server
+↓
+Test Backend APIs
+↓
+Submit Feedback Requests
+↓
+Prepare AI Processing Integration
 ```
 
 ---
 
-# 25. Setup Validation Checklist
+# 23. Current Implementation Status
 
-Successful setup should confirm:
+The current system includes:
 
-```text
-✅ Python installed
-✅ Git installed
-✅ GitHub repository created
-✅ FFmpeg installed
-✅ PyTorch installed
-✅ Whisper installed
-✅ Audio transcription successful
-```
-
----
-
-# 26. Current Phase Completion
-
-The following tasks were completed successfully:
-
-- development environment setup
-- dependency installation
-- Whisper configuration
-- speech-to-text testing
-- documentation creation
+- local Whisper transcription pipeline
+- Ollama integration
+- Qwen 2.5 7B setup
+- multilingual AI validation
+- structured JSON testing
+- Next.js application setup
+- API route architecture
+- controller layer initialization
+- backend folder organization
 
 ---
 
-# 27. Future Development Plan
+# 24. Current Development Direction
 
-Future phases include:
-- TypeScript backend implementation
-- Express API development
-- MongoDB integration
-- dashboard implementation
-- automated calling integration
-- feedback analytics
-- website deployment
+Current implementation work is focused on:
+
+- service layer architecture
+- Ollama API integration
+- structured AI response processing
+- PostgreSQL integration
+- analytics pipeline development
+- scalable backend architecture
 
 ---
 
-# 28. Final Result
+# 25. Final Result
 
-At the end of Phase 1:
-- development environment configured successfully
-- Whisper speech-to-text setup completed
-- audio transcription tested successfully
-- GitHub repository created
-- technical documentation completed
+The development environment now supports:
 
-This completes the initial setup and research phase of the project.
+- local AI execution
+- speech-to-text transcription
+- Next.js backend development
+- API route testing
+- multilingual AI analysis preparation
+- scalable backend architecture setup
+
+The repository documentation will continue evolving alongside the actual implementation and backend architecture.

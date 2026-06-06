@@ -666,7 +666,7 @@ automated-feedback-system/
 | Folder | Purpose |
 |---|---|
 | controllers | Handles HTTP request and response logic |
-| services | Intended for AI processing and business logic |
+| services | Handles AI inference orchestration, business logic, and response processing |
 | repositories | Planned database abstraction layer |
 | models | Application data models |
 | lib | Shared utilities and helper functions |
@@ -787,14 +787,18 @@ Start Ollama
 ↓
 Run Next.js Development Server
 ↓
-Test Backend APIs
-↓
 Submit Feedback Requests
 ↓
-Prepare AI Processing Integration
+Controller Receives Request
+↓
+Service Layer Processes Transcript
+↓
+Axios Sends Request To Ollama
+↓
+Qwen Generates Structured Analysis
+↓
+API Returns Structured JSON Response
 ```
-
----
 
 # 23. Current Implementation Status
 
@@ -807,7 +811,7 @@ The current system includes:
 - structured JSON testing
 - Next.js application setup
 - API route architecture
-- controller layer initialization
+- controller-service backend architecture
 - backend folder organization
 
 ---
@@ -833,7 +837,7 @@ The development environment now supports:
 - speech-to-text transcription
 - Next.js backend development
 - API route testing
-- multilingual AI analysis preparation
+- multilingual AI transcript analysis
 - scalable backend architecture setup
 
 The repository documentation will continue evolving alongside the actual implementation and backend architecture.
@@ -928,3 +932,15 @@ Example request body:
   }
 }
 ```
+# 30. LLM Response Processing
+
+During AI integration testing, Qwen occasionally returned markdown-formatted JSON responses.
+
+To ensure reliable API responses, the backend now performs:
+
+- markdown cleanup
+- JSON extraction
+- structured parsing
+- response normalization
+
+This processing layer ensures the frontend always receives properly formatted structured JSON responses from the backend API.

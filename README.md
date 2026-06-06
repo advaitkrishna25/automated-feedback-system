@@ -291,6 +291,120 @@ docs/setup-guide.md
 
 | Document | Purpose |
 |---|---|
+
+
+---
+
+# Updated Backend Architecture
+
+```text
+Frontend
+↓
+Next.js API Route
+↓
+Controller Layer
+↓
+Service Layer
+↓
+Axios HTTP Client
+↓
+Ollama API
+↓
+Qwen 2.5 7B
+↓
+Structured JSON Response
+```
+
+The backend architecture now separates HTTP request handling, business logic, and AI inference orchestration into independent layers.
+
+This architecture improves:
+
+- maintainability
+- scalability
+- separation of concerns
+- AI integration flexibility
+- backend extensibility
+
+---
+
+# AI Backend Integration
+
+The system now includes a working AI inference pipeline using:
+
+- Ollama
+- Qwen 2.5 7B
+- Axios
+- Next.js backend APIs
+
+Current AI processing pipeline:
+
+```text
+Transcript
+↓
+Prompt Generation
+↓
+Ollama API Request
+↓
+Qwen 2.5 7B Inference
+↓
+Structured JSON Response
+↓
+Response Validation
+↓
+API Response
+```
+
+---
+
+# Current AI Capabilities
+
+The current AI pipeline supports:
+
+- sentiment analysis
+- emotional analysis
+- urgency detection
+- follow-up recommendation generation
+- multilingual transcript analysis
+- structured JSON response generation
+
+Supported testing languages:
+
+- English
+- Hindi
+- Malayalam
+
+---
+
+# LLM Output Processing
+
+Qwen initially returned markdown-formatted JSON responses.
+
+To solve this issue, the backend now performs:
+
+- markdown cleanup
+- JSON extraction
+- structured response normalization
+- safe JSON parsing
+
+This ensures the backend always returns properly structured JSON responses.
+
+---
+
+# Current API Response Example
+
+```json
+{
+  "success": true,
+  "analysis": {
+    "sentiment": "positive",
+    "emotion": "satisfied",
+    "satisfaction_score": 8,
+    "urgency_level": "low",
+    "follow_up_required": false,
+    "summary": "Patient reported a positive consultation experience."
+  }
+}
+```
 | `docs/setup-guide.md` | Complete environment setup and installation guide |
 | `docs/model-evaluation-and-validation.md` | AI model evaluation, testing, and validation process |
 

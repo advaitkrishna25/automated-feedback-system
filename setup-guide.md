@@ -837,3 +837,94 @@ The development environment now supports:
 - scalable backend architecture setup
 
 The repository documentation will continue evolving alongside the actual implementation and backend architecture.
+
+---
+
+# 26. Install Axios
+
+## What Is Axios
+
+Axios is an HTTP client library used by the backend service layer to communicate with the Ollama API.
+
+---
+
+## Install Axios
+
+```bash
+cd frontend
+npm install axios
+```
+
+---
+
+# 27. Start Ollama Before Running Backend
+
+Start Ollama using:
+
+```bash
+ollama run qwen2.5:7b
+```
+
+This confirms:
+
+- Ollama functioning correctly
+- Qwen model available locally
+- inference pipeline operational
+
+---
+
+# 28. Current AI Inference Workflow
+
+```text
+Frontend
+↓
+API Route
+↓
+Controller
+↓
+Service Layer
+↓
+Axios
+↓
+Ollama
+↓
+Qwen 2.5 7B
+↓
+Structured JSON Response
+```
+
+---
+
+# 29. Test AI Feedback Endpoint
+
+Example request:
+
+```http
+POST http://localhost:3000/api/feedback
+```
+
+Example request body:
+
+```json
+{
+  "transcript": "The doctor explained everything clearly but the waiting time was too long."
+}
+```
+
+---
+
+## Example AI Response
+
+```json
+{
+  "success": true,
+  "analysis": {
+    "sentiment": "mixed",
+    "emotion": "slightly frustrated",
+    "satisfaction_score": 7,
+    "urgency_level": "low",
+    "follow_up_required": false,
+    "summary": "Patient appreciated the consultation but reported excessive waiting time."
+  }
+}
+```

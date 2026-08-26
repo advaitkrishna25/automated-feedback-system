@@ -2,99 +2,181 @@
 
 ## Overview
 
-The AI-Powered Automated Patient Feedback Calling System is a full-stack healthcare feedback processing platform designed to automate patient feedback collection, transcription, AI analysis, and structured insight generation.
+The AI-Powered Automated Patient Feedback Calling System is a full-stack healthcare feedback processing platform designed to automate patient feedback collection, voice transcription, AI analysis, structured insight generation, and feedback management.
 
-The system combines automated voice workflows with local AI processing pipelines to transform patient conversations into structured analytical data that can be stored, visualized, and reviewed through a dashboard interface.
+The system allows feedback to be submitted through text or voice. Voice feedback is transcribed using Whisper and then analyzed locally using Qwen 2.5 7B through Ollama. The resulting structured analysis is stored in PostgreSQL and presented through a dashboard interface.
 
-The project is being developed as a production-oriented engineering system with a strong focus on:
+The project is developed with a strong focus on:
 
 - backend architecture
 - AI integration workflows
-- reproducible development environments
-- scalable service design
+- speech-to-text processing
 - structured data processing
-- multilingual healthcare feedback analysis
-
-The repository evolves alongside the actual implementation and documents real architectural decisions, APIs, integrations, and backend workflows as development progresses.
+- layered backend design
+- local AI inference
+- database persistence
+- scalable service organization
 
 ---
 
 # System Workflow
 
 ```text
-Patient Call
-↓
-Voice Response Recording
-↓
-Whisper Large-v3 Transcription
-↓
-Transcript Processing
-↓
-Qwen 2.5 7B Analysis
-↓
-Structured JSON Generation
-↓
-Database Storage
-↓
-Dashboard Visualization
+Patient Feedback
+      |
+      +-------------------+
+      |                   |
+      v                   v
+Voice Input          Text Input
+      |
+      v
+Audio Recording
+      |
+      v
+Whisper API
+      |
+      v
+Transcript
+      |
+      +-------------------+
+                          |
+                          v
+                   Next.js API Route
+                          |
+                          v
+                  FeedbackController
+                          |
+                          v
+                   FeedbackService
+                          |
+                          v
+                        Axios
+                          |
+                          v
+                    Ollama API
+                          |
+                          v
+                     Qwen 2.5 7B
+                          |
+                          v
+              JSON Parsing / Cleanup
+                          |
+                          v
+             Response Normalization
+                          |
+                          v
+                Feedback Repository
+                          |
+                          v
+                       Prisma
+                          |
+                          v
+                    PostgreSQL
+                          |
+                          v
+                 Feedback Dashboard
 ```
 
 ---
 
-# Current Backend Architecture
+# Current Architecture
+
+The application follows a layered backend architecture.
 
 ```text
-Client Request
-↓
+Frontend
+   |
+   v
 Next.js API Route
-↓
+   |
+   v
 Controller Layer
-↓
-Service Layer (In Progress)
-↓
-Qwen AI Integration
-↓
-Structured JSON Processing
-↓
-Database Layer (Planned)
-↓
-Dashboard Analytics
+   |
+   v
+Service Layer
+   |
+   +--------------------+
+   |                    |
+   v                    v
+Whisper API          Ollama API
+   |                    |
+   v                    v
+Transcript           Qwen 2.5 7B
+                        |
+                        v
+                 Structured Analysis
+                        |
+                        +---------+
+                                  |
+                                  v
+                         Repository Layer
+                                  |
+                                  v
+                               Prisma
+                                  |
+                                  v
+                             PostgreSQL
 ```
 
-The backend currently uses a controller-oriented architecture to separate HTTP handling logic from future business and AI processing layers. This structure is intended to improve maintainability, scalability, and long-term extensibility as the system evolves.
+The backend separates HTTP handling, application logic, AI orchestration, and database access into independent layers.
+
+This improves:
+
+- maintainability
+- separation of concerns
+- scalability
+- testability
+- AI integration flexibility
+- backend extensibility
 
 ---
 
 # Current Features
 
+## Voice Processing
+
+- Browser-based voice recording
+- Audio upload and processing
+- Whisper speech-to-text transcription
+- Dedicated Whisper API service
+- FastAPI-based transcription endpoint
+- FFmpeg audio processing support
+
+## Text Processing
+
+- Direct text feedback submission
+- Feedback analysis without voice transcription
+- Shared AI analysis pipeline for voice and text feedback
+
 ## AI Processing
 
-- Whisper speech-to-text integration
 - Local AI inference using Ollama
 - Qwen 2.5 7B integration
-- Structured JSON output generation
-- Multilingual testing
-- Sentiment analysis validation
-- Emotion detection validation
-- Urgency detection validation
+- Sentiment analysis
+- Emotion detection
+- Satisfaction scoring
+- Urgency detection
+- Follow-up requirement detection
+- AI-generated summaries
+- Structured JSON output
+- JSON cleanup and normalization
 
-## Backend Implementation
+## Feedback Management
 
-- Next.js backend initialization
-- API route architecture
-- Controller layer initialization
-- GET request handling
-- POST request handling
-- Health monitoring endpoint
+- Feedback persistence
+- Feedback retrieval
+- Individual feedback retrieval
+- Feedback deletion
+- Search and filtering
+- Dashboard statistics
+- Feedback analysis display
 
-## Development Infrastructure
+## Database
 
-- Local AI model execution
-- FFmpeg integration
-- Git and GitHub setup
-- TypeScript environment setup
-- Backend folder organization
-- Documentation-driven development workflow
+- PostgreSQL integration
+- Prisma ORM
+- Prisma migrations
+- Repository-based database access
 
 ---
 
@@ -111,68 +193,212 @@ The backend currently uses a controller-oriented architecture to separate HTTP h
 
 - Next.js API Routes
 - TypeScript
+- Axios
+- Controller / Service / Repository architecture
 
-## AI Processing
+## Speech Recognition
 
-- Whisper Large-v3
-- Qwen 2.5 7B
-- Ollama
-- PyTorch
+- OpenAI Whisper
+- Python
+- FastAPI
+- Uvicorn
 - FFmpeg
+- PyTorch
 
-## Planned Infrastructure
+## AI Analysis
+
+- Ollama
+- Qwen 2.5 7B
+
+## Database
 
 - PostgreSQL
-- Twilio
-- Analytics Dashboard
-- Authentication System
-- Sentiment Visualization
-- Emotion Analytics
-- Urgency Scoring
+- Prisma ORM
 
 ---
 
 # Repository Structure
 
 ```text
-.
-├── README.md
-├── docs/
-│   ├── setup-guide.md
-│   └── model-evaluation-and-validation.md
-│
+automated-feedback-system/
+|
 ├── frontend/
-│   ├── src/
-│   │   ├── app/
-│   │   │   └── api/
-│   │   │
-│   │   ├── controllers/
-│   │   ├── services/
-│   │   ├── repositories/
-│   │   ├── models/
-│   │   ├── lib/
-│   │   └── types/
-│   │
-│   ├── package.json
-│   └── tsconfig.json
-│
-├── audio/
-└── outputs/
+|   |
+|   ├── prisma/
+|   |   ├── migrations/
+|   |   └── schema.prisma
+|   |
+|   ├── src/
+|   |   |
+|   |   ├── app/
+|   |   |   |
+|   |   |   ├── api/
+|   |   |   |   |
+|   |   |   |   ├── feedback/
+|   |   |   |   |   ├── [id]/
+|   |   |   |   |   └── route.ts
+|   |   |   |   |
+|   |   |   |   └── transcribe/
+|   |   |   |       └── route.ts
+|   |   |   |
+|   |   |   └── page.tsx
+|   |   |
+|   |   ├── controllers/
+|   |   |   └── FeedbackController.ts
+|   |   |
+|   |   ├── services/
+|   |   |   └── FeedbackService.ts
+|   |   |
+|   |   ├── repositories/
+|   |   |   └── FeedbackRepository.ts
+|   |   |
+|   |   └── lib/
+|   |       └── prisma.ts
+|   |
+|   ├── prisma.config.ts
+|   ├── package.json
+|   └── ...
+|
+├── whisper/
+|   └── app.py
+|
+├── backend/
+|
+├── model-evaluation-and-validation.md
+├── setup-guide.md
+├── README.md
+└── .gitignore
 ```
+
+---
+
+# Voice Processing Pipeline
+
+Voice feedback follows a dedicated speech-to-text pipeline.
+
+```text
+Patient
+   |
+   v
+Browser Microphone
+   |
+   v
+Audio Recording
+   |
+   v
+Next.js /api/transcribe
+   |
+   v
+Whisper FastAPI Service
+   |
+   v
+Speech-to-Text
+   |
+   v
+Transcript
+```
+
+The transcript is then passed into the same feedback analysis pipeline used for text feedback.
+
+---
+
+# AI Analysis Pipeline
+
+The AI analysis pipeline processes the transcript using Qwen 2.5 7B through Ollama.
+
+```text
+Transcript
+    |
+    v
+Prompt Generation
+    |
+    v
+FeedbackService
+    |
+    v
+Axios
+    |
+    v
+Ollama API
+    |
+    v
+Qwen 2.5 7B
+    |
+    v
+AI Response
+    |
+    v
+JSON Extraction
+    |
+    v
+Cleanup
+    |
+    v
+Validation
+    |
+    v
+Normalization
+    |
+    v
+Structured Feedback
+```
+
+---
+
+# AI Analysis
+
+For each feedback submission, Qwen 2.5 7B generates structured information including:
+
+| Field | Description |
+|---|---|
+| Sentiment | Overall sentiment of the feedback |
+| Emotion | Detected emotional state |
+| Satisfaction Score | Satisfaction score from 1–5 |
+| Urgency Level | Estimated urgency of the feedback |
+| Follow-up Required | Whether follow-up action may be required |
+| Summary | Concise summary of the feedback |
+
+## Example
+
+### Input
+
+```text
+The doctor was very friendly and explained everything clearly.
+The waiting time was a little long, but overall I am satisfied.
+```
+
+### Output
+
+```json
+{
+  "sentiment": "positive",
+  "emotion": "satisfied",
+  "satisfactionScore": 4,
+  "urgencyLevel": "low",
+  "followUpRequired": false,
+  "summary": "The patient was satisfied with the doctor's friendliness and clear explanations, despite the long waiting time."
+}
+```
+
+---
+
+# LLM Output Processing
+
+Qwen may return responses containing markdown formatting or additional text around the JSON response.
+
+The backend therefore performs:
+
+- markdown cleanup
+- JSON extraction
+- JSON parsing
+- response validation
+- structured response normalization
+
+This ensures that the application returns a consistent structured response to the frontend.
 
 ---
 
 # Current API Endpoints
-
-## Health Check
-
-```http
-GET /api/health
-```
-
-Used to verify backend availability and API responsiveness.
-
----
 
 ## Retrieve Feedback
 
@@ -180,7 +406,7 @@ Used to verify backend availability and API responsiveness.
 GET /api/feedback
 ```
 
-Returns available feedback records.
+Retrieves stored feedback records for the dashboard.
 
 ---
 
@@ -190,252 +416,527 @@ Returns available feedback records.
 POST /api/feedback
 ```
 
-Processes feedback submissions and prepares the system for AI-based transcript analysis workflows.
+Accepts patient feedback and performs AI analysis before storing the resulting structured data.
 
 ### Example Request
 
 ```json
 {
-  "patientId": "P1001",
   "transcript": "The doctor was very professional but the waiting time was too long."
 }
 ```
 
-### Planned AI Response Structure
+### Example Response
 
 ```json
 {
   "success": true,
   "analysis": {
-    "language": "English",
-    "sentiment": "mixed",
-    "emotion": "slightly frustrated",
-    "satisfaction_score": 7,
-    "urgency_level": "low",
-    "follow_up_required": false,
-    "summary": "Patient appreciated the doctor but reported excessive waiting time."
+    "id": 1,
+    "transcript": "The doctor was very professional but the waiting time was too long.",
+    "sentiment": "positive",
+    "emotion": "satisfied",
+    "satisfactionScore": 4,
+    "urgencyLevel": "low",
+    "followUpRequired": false,
+    "summary": "The patient appreciated the doctor but was dissatisfied with the waiting time."
   }
 }
 ```
 
 ---
 
-# AI Model Evaluation
+## Retrieve Individual Feedback
 
-## Selected Model
-
-```text
-Qwen 2.5 7B
+```http
+GET /api/feedback/:id
 ```
 
-The model was selected after evaluating multiple open-source LLMs for:
+Retrieves a specific feedback record.
 
-- multilingual support
-- structured output quality
-- local deployment capability
-- Ollama compatibility
-- hardware feasibility
-- healthcare feedback analysis suitability
+---
 
-Detailed evaluation documentation is available in:
+## Delete Feedback
+
+```http
+DELETE /api/feedback/:id
+```
+
+Deletes a specific feedback record.
+
+---
+
+## Speech Transcription
+
+```http
+POST /api/transcribe
+```
+
+Accepts recorded audio and sends it to the Whisper service for transcription.
+
+---
+
+# Database Architecture
+
+The application uses PostgreSQL for persistent feedback storage.
+
+Prisma provides the ORM layer.
 
 ```text
-docs/model-evaluation-and-validation.md
+FeedbackService
+      |
+      v
+FeedbackRepository
+      |
+      v
+Prisma
+      |
+      v
+PostgreSQL
+```
+
+The feedback data includes:
+
+- transcript
+- sentiment
+- emotion
+- satisfaction score
+- urgency level
+- follow-up requirement
+- summary
+- creation timestamp
+
+---
+
+# Local AI Architecture
+
+The project uses local AI services rather than relying on external hosted inference APIs.
+
+## Whisper
+
+```text
+Audio
+  |
+  v
+Whisper
+  |
+  v
+Transcript
+```
+
+## Qwen
+
+```text
+Transcript
+    |
+    v
+Ollama
+    |
+    v
+Qwen 2.5 7B
+    |
+    v
+Structured Analysis
+```
+
+This allows the core AI processing pipeline to run locally during development.
+
+---
+
+# Development Setup
+
+## Requirements
+
+Install the following:
+
+- Node.js
+- Python 3.10+
+- PostgreSQL
+- FFmpeg
+- Ollama
+
+---
+
+## Clone Repository
+
+```bash
+git clone https://github.com/advaitkrishna25/automated-feedback-system.git
+cd automated-feedback-system
 ```
 
 ---
 
-# Local Development Setup
+# Frontend Setup
 
-Clone the repository:
+Navigate to the frontend:
 
-```bash
-git clone https://github.com/your-username/automated-feedback-system.git
-```
-
-Move into the frontend application:
-
-```bash
+```powershell
 cd frontend
 ```
 
 Install dependencies:
 
-```bash
+```powershell
 npm install
 ```
 
-Start the development server:
+---
 
-```bash
+# Environment Variables
+
+Create:
+
+```text
+frontend/.env
+```
+
+Configure the PostgreSQL connection used by Prisma.
+
+Example:
+
+```env
+DATABASE_URL="postgresql://USERNAME:PASSWORD@localhost:5432/feedback_db"
+```
+
+Do not commit `.env` files or database credentials to GitHub.
+
+---
+
+# Prisma Setup
+
+From the `frontend` directory:
+
+```powershell
+npx prisma generate
+```
+
+Apply the migrations:
+
+```powershell
+npx prisma migrate dev
+```
+
+---
+
+# Ollama Setup
+
+Install Ollama and make sure the Qwen model is available.
+
+Pull the model:
+
+```powershell
+ollama pull qwen2.5:7b
+```
+
+Start Ollama:
+
+```powershell
+ollama serve
+```
+
+The Ollama API is available at:
+
+```text
+http://127.0.0.1:11434
+```
+
+---
+
+# Whisper Setup
+
+The Whisper service is located in:
+
+```text
+whisper/
+```
+
+Activate the Python virtual environment:
+
+```powershell
+cd C:\Projects\automated-feedback-system\whisper
+.\venv\Scripts\Activate.ps1
+```
+
+Start the Whisper API:
+
+```powershell
+python -m uvicorn app:app --reload --port 8000
+```
+
+The Whisper API runs at:
+
+```text
+http://127.0.0.1:8000
+```
+
+---
+
+# Start the Frontend
+
+Open another terminal:
+
+```powershell
+cd C:\Projects\automated-feedback-system\frontend
 npm run dev
 ```
 
-The Next.js development server should start on:
+The application runs at:
 
 ```text
 http://localhost:3000
 ```
 
-Detailed environment setup instructions, Whisper installation steps, Ollama setup, and AI model configuration are available in:
+---
+
+# Running the Complete System
+
+Three services are required during local development.
+
+## Terminal 1 — Whisper
+
+```powershell
+cd C:\Projects\automated-feedback-system\whisper
+.\venv\Scripts\Activate.ps1
+python -m uvicorn app:app --reload --port 8000
+```
+
+## Terminal 2 — Ollama
+
+```powershell
+ollama serve
+```
+
+## Terminal 3 — Next.js
+
+```powershell
+cd C:\Projects\automated-feedback-system\frontend
+npm run dev
+```
+
+Then open:
 
 ```text
-docs/setup-guide.md
+http://localhost:3000
 ```
+
+---
+
+# End-to-End Flow
+
+```text
+                VOICE FEEDBACK
+                       |
+                       v
+                Audio Recording
+                       |
+                       v
+                 Whisper API
+                       |
+                       v
+                   Transcript
+                       |
+                       v
+                 Next.js API
+                       |
+                       v
+              FeedbackController
+                       |
+                       v
+                FeedbackService
+                       |
+                       v
+                    Axios
+                       |
+                       v
+                  Ollama API
+                       |
+                       v
+                 Qwen 2.5 7B
+                       |
+                       v
+             JSON Processing
+                       |
+                       v
+              Structured Data
+                       |
+                       v
+            FeedbackRepository
+                       |
+                       v
+                    Prisma
+                       |
+                       v
+                 PostgreSQL
+                       |
+                       v
+                  Dashboard
+```
+
+---
+
+# Dashboard
+
+The dashboard provides a centralized interface for reviewing analyzed patient feedback.
+
+It supports:
+
+- viewing feedback
+- viewing transcripts
+- viewing AI analysis
+- sentiment display
+- emotion display
+- satisfaction scores
+- urgency levels
+- follow-up status
+- AI summaries
+- searching feedback
+- filtering feedback
+- deleting feedback
+- viewing feedback statistics
+
+---
+
+# Testing
+
+The complete pipeline has been tested using both text and voice feedback.
+
+Voice testing included multiple emotional scenarios:
+
+- Happy / satisfied
+- Sad / disappointed
+- Angry / frustrated
+- Fearful / anxious
+- Neutral
+- Disgusted
+- Surprised
+- Relieved
+
+The tested scenarios successfully produced transcriptions and corresponding AI analyses.
+
+---
+
+# Current Implementation Status
+
+| Component | Status |
+|---|---|
+| React frontend | Complete |
+| Next.js application | Complete |
+| Voice recording | Complete |
+| Whisper transcription | Complete |
+| Text feedback | Complete |
+| Qwen 2.5 7B integration | Complete |
+| Ollama integration | Complete |
+| Sentiment analysis | Complete |
+| Emotion detection | Complete |
+| Satisfaction scoring | Complete |
+| Urgency detection | Complete |
+| Follow-up detection | Complete |
+| AI summaries | Complete |
+| JSON cleanup and normalization | Complete |
+| PostgreSQL integration | Complete |
+| Prisma ORM | Complete |
+| Repository layer | Complete |
+| Controller layer | Complete |
+| Service layer | Complete |
+| Feedback dashboard | Complete |
+| Search and filtering | Complete |
+| Feedback deletion | Complete |
+
+---
+
+# Engineering Architecture
+
+The project uses a layered architecture to keep responsibilities separated.
+
+```text
+                API ROUTE
+                    |
+                    v
+              CONTROLLER
+                    |
+                    v
+                 SERVICE
+                    |
+          +---------+---------+
+          |                   |
+          v                   v
+      WHISPER             OLLAMA
+          |                   |
+          v                   v
+     TRANSCRIPT          QWEN 2.5
+                              |
+                              v
+                       AI ANALYSIS
+                              |
+                              v
+                         REPOSITORY
+                              |
+                              v
+                           PRISMA
+                              |
+                              v
+                        POSTGRESQL
+```
+
+This structure allows individual components to be modified or replaced without requiring major changes to the rest of the system.
+
+---
+
+# Security Notes
+
+- Environment variables are excluded from Git.
+- Database credentials should never be committed.
+- Local AI services are used during development.
+- The current configuration is intended for local development.
+- Production deployment would require additional authentication, authorization, security, and infrastructure configuration.
+
+---
+
+# Future Improvements
+
+Potential future improvements include:
+
+- Improved Whisper accuracy for different accents
+- Larger Whisper models
+- Authentication and authorization
+- Role-based access
+- Advanced feedback analytics
+- Feedback trend visualization
+- Report generation and export
+- Production deployment
+- Automated testing
+- Docker containerization
+- Improved multilingual evaluation
+- Automated voice calling integration
+- Twilio integration for automated calls
 
 ---
 
 # Documentation
 
-## Available Documentation
-
 | Document | Purpose |
 |---|---|
+| `setup-guide.md` | Environment setup and installation instructions |
+| `model-evaluation-and-validation.md` | AI model evaluation, testing, and validation |
 
-
----
-
-# Updated Backend Architecture
-
-```text
-Frontend
-↓
-Next.js API Route
-↓
-Controller Layer
-↓
-Service Layer
-↓
-Axios HTTP Client
-↓
-Ollama API
-↓
-Qwen 2.5 7B
-↓
-Structured JSON Response
-```
-
-The backend architecture now separates HTTP request handling, business logic, and AI inference orchestration into independent layers.
-
-This architecture improves:
-
-- maintainability
-- scalability
-- separation of concerns
-- AI integration flexibility
-- backend extensibility
+Additional documentation will continue to evolve alongside the implementation.
 
 ---
 
-# AI Backend Integration
+# Project Goals
 
-The system now includes a working AI inference pipeline using:
+This project is being developed as:
 
-- Ollama
-- Qwen 2.5 7B
-- Axios
-- Next.js backend APIs
-
-Current AI processing pipeline:
-
-```text
-Transcript
-↓
-Prompt Generation
-↓
-Ollama API Request
-↓
-Qwen 2.5 7B Inference
-↓
-Structured JSON Response
-↓
-Response Validation
-↓
-API Response
-```
-
----
-
-# Current AI Capabilities
-
-The current AI pipeline supports:
-
-- sentiment analysis
-- emotional analysis
-- urgency detection
-- follow-up recommendation generation
-- multilingual transcript analysis
-- structured JSON response generation
-
-Supported testing languages:
-
-- English
-- Hindi
-- Malayalam
-
----
-
-# LLM Output Processing
-
-Qwen initially returned markdown-formatted JSON responses.
-
-To solve this issue, the backend now performs:
-
-- markdown cleanup
-- JSON extraction
-- structured response normalization
-- safe JSON parsing
-
-This ensures the backend always returns properly structured JSON responses.
-
----
-
-# Current API Response Example
-
-```json
-{
-  "success": true,
-  "analysis": {
-    "sentiment": "positive",
-    "emotion": "satisfied",
-    "satisfaction_score": 8,
-    "urgency_level": "low",
-    "follow_up_required": false,
-    "summary": "Patient reported a positive consultation experience."
-  }
-}
-```
-| `docs/setup-guide.md` | Complete environment setup and installation guide |
-| `docs/model-evaluation-and-validation.md` | AI model evaluation, testing, and validation process |
-
-Additional documentation will continue expanding alongside backend implementation and AI integration development.
-
----
-
-# Current Development Direction
-
-Current implementation work is focused on:
-
-- service layer architecture
-- Ollama API integration
-- structured AI response processing
-- PostgreSQL integration
-- analytics pipeline development
-- dashboard implementation
-- scalable backend architecture
-- AI processing orchestration
-
----
-
-# Engineering Goals
-
-This repository is being developed as:
-
-- a reproducible implementation guide
-- a backend engineering reference
+- a full-stack AI engineering project
+- a healthcare feedback processing system
+- a reproducible local AI application
+- a backend architecture reference
 - an AI integration learning resource
-- a scalable full-stack software system
 - a portfolio-quality engineering project
-- a long-term extensible platform
+- a foundation for future automated patient feedback calling
 
-The project documentation reflects actual implementation progress, architectural decisions, and evolving backend workflows rather than static planning documents.
+---
+
+# License
+
+This project is intended for educational and project-development purposes.

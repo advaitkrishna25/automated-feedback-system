@@ -38,3 +38,4 @@ outputs/
 # Temporary Files
 tmp/
 temp/
+/generated/prisma

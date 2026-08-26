@@ -12,4 +12,32 @@ export class FeedbackController {
       analysis,
     };
   }
+
+  static async getAllFeedback() {
+    const feedback =
+      await FeedbackService.getAllFeedback();
+
+    return {
+      success: true,
+      feedback,
+    };
+  }
+  static async getFeedbackById(id: number) {
+    const feedback =
+      await FeedbackService.getFeedbackById(id);
+
+    return {
+      success: true,
+      feedback,
+    };
+  }
+static async deleteFeedback(id: number) {
+  const feedback =
+    await FeedbackService.deleteFeedback(id);
+
+  return {
+    success: true,
+    feedback,
+  };
+}
 }
